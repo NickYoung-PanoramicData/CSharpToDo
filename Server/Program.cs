@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CSharpToDo
 {
@@ -13,6 +14,8 @@ namespace CSharpToDo
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddRazorPages();
 			builder.Services.AddSwaggerGen();
+
+			builder.Services.AddInMemoryRepository();
 
 			var app = builder.Build();
 
