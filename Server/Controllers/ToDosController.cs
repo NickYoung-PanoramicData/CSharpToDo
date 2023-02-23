@@ -21,18 +21,21 @@ namespace CSharpToDo.Server.Controllers
 
 		// GET api/<ToDosController>/5
 		[HttpGet("{id}")]
-		public ToDo? Get(int id)
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public ActionResult<ToDo> Get(int id)
 		{
 			if (_toDos.TryGetValue(id, out var toDo))
 			{
 				return toDo;
 			}
 
-			return null;
+			return NotFound();
 		}
 
 		// POST api/<ToDosController>
 		[HttpPost]
+		[ProducesResponseType(StatusCodes.Status200OK)]
 		public void Post([FromBody] ToDo value)
 		{
 			var maxId = 0;
@@ -47,24 +50,32 @@ namespace CSharpToDo.Server.Controllers
 
 		// PUT api/<ToDosController>/5
 		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] ToDo value)
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public ActionResult Put(int id, [FromBody] ToDo value)
 		{
-			if (_toDos.Keys.Contains(id))
+			if (_toDos.ContainsKey(id))
 			{
 				_toDos.Remove(id);
 				value.Id = id;
 				_toDos[id] = value;
-			}	
+			}
+
+			return NotFound();
 		}
 
 		// DELETE api/<ToDosController>/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public ActionResult Delete(int id)
 		{
-			if (_toDos.Keys.Contains(id))
+			if (_toDos.ContainsKey(id))
 			{
 				_toDos.Remove(id);
-			}	
+			}
+
+			return NotFound();
 		}
 	}
 }
