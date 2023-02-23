@@ -1,4 +1,5 @@
-﻿using CSharpToDo.Shared.Models;
+﻿using CSharpToDo.Data.Interfaces;
+using CSharpToDo.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -10,22 +11,28 @@ namespace CSharpToDo.Server.Controllers
 	public class ToDosController : ControllerBase
 	{
 		private readonly static IDictionary<int, ToDo> _toDos = new ConcurrentDictionary<int, ToDo>();
+		private readonly IToDosRepository _repository;
 
+		public ToDosController(IToDosRepository repository)
+		{
+			_repository = repository;
+		}
 
 		// GET: api/<ToDosController>
 		[HttpGet]
-		public IEnumerable<ToDo> Get()
+		public Task<IEnumerable<ToDo>> GetAsync()
 		{
-			return _toDos.Values;
+			return _repository.GetListAsync();
 		}
 
 		// GET api/<ToDosController>/5
 		[HttpGet("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public ActionResult<ToDo> Get(int id)
+		public async Task<ActionResult<ToDo>> GetAsync(int id)
 		{
-			if (_toDos.TryGetValue(id, out var toDo))
+			var toDo = await _repository.GetAsync(id);
+			if (toDo is not null)
 			{
 				return toDo;
 			}
@@ -36,29 +43,21 @@ namespace CSharpToDo.Server.Controllers
 		// POST api/<ToDosController>
 		[HttpPost]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public void Post([FromBody] ToDo value)
+		public async Task PostAsync([FromBody] ToDo value)
 		{
-			var maxId = 0;
-			if(_toDos.Keys.Count > 0)
-			{
-				maxId = _toDos.Keys.Max();
-			}
-
-			value.Id = ++maxId;
-			_toDos.Add(maxId,value);
+			await _repository.AddAsync(value);
 		}
 
 		// PUT api/<ToDosController>/5
 		[HttpPut("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public ActionResult Put(int id, [FromBody] ToDo value)
+		public async Task<ActionResult> PutAsync(int id, [FromBody] ToDo value)
 		{
-			if (_toDos.ContainsKey(id))
+			var toDo = await _repository.UpdateAsync(id, value);
+			if (toDo is not null)
 			{
-				_toDos.Remove(id);
-				value.Id = id;
-				_toDos[id] = value;
+				return Ok();
 			}
 
 			return NotFound();
@@ -68,11 +67,11 @@ namespace CSharpToDo.Server.Controllers
 		[HttpDelete("{id}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public ActionResult Delete(int id)
+		public async Task<ActionResult> DeleteAsync(int id)
 		{
-			if (_toDos.ContainsKey(id))
+			if (await _repository.DeleteAsync(id))
 			{
-				_toDos.Remove(id);
+				return Ok();
 			}
 
 			return NotFound();
