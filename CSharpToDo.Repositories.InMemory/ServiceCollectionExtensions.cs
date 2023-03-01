@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
 	{
 		public static IServiceCollection AddInMemoryRepository(this IServiceCollection services)
 		{
-			services.AddScoped<IToDosRepository, ToDosRepository>();
+			services.AddSingleton<IToDosRepository, ToDosRepository>();
 			return services;
 		}
 	}
