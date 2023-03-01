@@ -1,5 +1,5 @@
 ﻿using CSharpToDo.Data.Interfaces;
-using CSharpToDos.Repositories.InMemory;
+using CSharpToDo.Repositories.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
