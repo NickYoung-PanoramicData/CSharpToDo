@@ -7,18 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpToDos.Repositories.InMemory
+namespace CSharpToDo.Repositories.InMemory
 {
 	internal class ToDosRepository : IToDosRepository
 	{
 		private readonly static IDictionary<int, ToDo> _toDos = new ConcurrentDictionary<int, ToDo>();
 
-		public Task<IEnumerable<ToDo>> GetListAsync()
+		public Task<IEnumerable<ToDo>> GetListAsync(CancellationToken _)
 		{
 			return Task.FromResult(_toDos.Values.AsEnumerable<ToDo>());
 		}
 
-		public Task<ToDo?> GetAsync(int id)
+		public Task<ToDo?> GetAsync(int id, CancellationToken _)
 		{
 			if (_toDos.TryGetValue(id, out var toDo))
 			{
@@ -28,7 +28,7 @@ namespace CSharpToDos.Repositories.InMemory
 			return Task.FromResult<ToDo?>(null);
 		}
 
-		public Task<ToDo> AddAsync(ToDo item) 
+		public Task<ToDo> AddAsync(ToDo item, CancellationToken _)
 		{
 			var maxId = 0;
 			if (_toDos.Keys.Count > 0)
@@ -43,7 +43,7 @@ namespace CSharpToDos.Repositories.InMemory
 			return Task.FromResult(item);
 		}
 
-		public Task<ToDo?> UpdateAsync(int id, ToDo item)
+		public Task<ToDo?> UpdateAsync(int id, ToDo item, CancellationToken _)
 		{
 			if (_toDos.ContainsKey(id))
 			{
@@ -57,7 +57,7 @@ namespace CSharpToDos.Repositories.InMemory
 			return Task.FromResult<ToDo?>(null);
 		}
 
-		public Task<bool> DeleteAsync(int id)
+		public Task<bool> DeleteAsync(int id, CancellationToken _)
 		{
 			if (_toDos.ContainsKey(id))
 			{

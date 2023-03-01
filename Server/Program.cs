@@ -1,3 +1,4 @@
+using CSharpToDo.Server.Helpers;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -5,7 +6,7 @@ namespace CSharpToDo
 {
 	public class Program
 	{
-		public static void Main(string[] args)
+		public static async Task Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,8 @@ namespace CSharpToDo
 			builder.Services.AddRazorPages();
 			builder.Services.AddSwaggerGen();
 
-			builder.Services.AddInMemoryRepository();
+			//builder.Services.AddInMemoryRepository();
+			builder.Services.AddEfRepository(builder.Configuration);
 
 			var app = builder.Build();
 
@@ -44,6 +46,10 @@ namespace CSharpToDo
 			app.MapRazorPages();
 			app.MapControllers();
 			app.MapFallbackToFile("index.html");
+
+			await DbContextHelper
+				.EnsureDatabaseOkAsync(app)
+				.ConfigureAwait(false);
 
 			app.Run();
 		}
