@@ -37,7 +37,8 @@ namespace CSharpToDo.Repositories.Ef
 			var now = DateTime.UtcNow;
 			foreach (var changedEntity in ChangeTracker.Entries().Where(e => e.Entity is IAuditable))
 			{
-				if (changedEntity is IAuditable auditableEntity)
+				var auditableEntity = changedEntity.Entity as IAuditable;
+				if (auditableEntity is not null)
 				{
 					switch (changedEntity.State)
 					{

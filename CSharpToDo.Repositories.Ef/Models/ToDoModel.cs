@@ -1,4 +1,5 @@
-﻿using CSharpToDo.Shared.Models;
+﻿using CSharpToDo.Repositories.Ef.Interfaces;
+using CSharpToDo.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CSharpToDo.Repositories.Ef.Models
 {
-	public class ToDoModel
+	public class ToDoModel : IAuditable
 	{
 		public int Id { get; set; }
 
