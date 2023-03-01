@@ -22,29 +22,29 @@ namespace CSharpToDo.Repositories.Ef
 
 		public async Task<IEnumerable<ToDo>> GetListAsync(CancellationToken cancellationToken)
 		{
-			return await _dbContext
-				.ToDos
-				.Select(t => t.AsToDo())
-				.ToListAsync(cancellationToken)
+			return await _dbContext//Database variable
+				.ToDos//Records within database
+				.Select(t => t.AsToDo())//Projects all elements of the sequence
+				.ToListAsync(cancellationToken)//Built in method that casts to a list
 				.ConfigureAwait(false);
 		}
 
 		public async Task<ToDo?> GetAsync(int id, CancellationToken cancellationToken)
 		{
-			return (await _dbContext
-				.ToDos
-				.FirstOrDefaultAsync(t => t.Id == id, cancellationToken)
-				.ConfigureAwait(false))
-				?.AsToDo();
+			return (await _dbContext//Database variable
+				.ToDos//Records within database
+				.FirstOrDefaultAsync(t => t.Id == id, cancellationToken)//Fetches the first element of the list thats Id is equal the one specified in the parameter of the method
+				.ConfigureAwait(false))//Ends the await
+				?.AsToDo();//Cast to type ToDo
 		}
 
 		public async Task<ToDo> AddAsync(ToDo item, CancellationToken cancellationToken)
 		{
-			var newModel = ToDoModel.AsToDoModel(item);
-			_dbContext
+			var newModel = ToDoModel.AsToDoModel(item);//Takes ToDo parameter and casts as a ToDoModel (What is the difference? Is it required to be of that type to enter the database?) stored in newModel
+			_dbContext//Add newModel to database variable
 			.ToDos.Add(newModel);
 
-			await _dbContext
+			await _dbContext//Asynchronous code to push the changes made to dbContext to the actual database
 				.SaveChangesAsync(cancellationToken)
 				.ConfigureAwait(false);
 			return newModel.AsToDo();
@@ -53,15 +53,15 @@ namespace CSharpToDo.Repositories.Ef
 		public async Task<ToDo?> UpdateAsync(int id, ToDo item, CancellationToken cancellationToken)
 		{
 			var existingItem = _dbContext.ToDos.FirstOrDefault(t => t.Id == id);
-			if (existingItem is null)
+			if (existingItem is null)//If existingItem didn't find any toDos with the specified Id return null
 			{
 				return null;
 			}
 
-			existingItem.Name = item.Name;
-			existingItem.IsCompleted = item.IsCompleted;
+			existingItem.Name = item.Name;//update the requested items name with the one passed in the parameter
+			existingItem.IsCompleted = item.IsCompleted;//update completed with parameter
 
-			await _dbContext
+			await _dbContext//Push changes to database
 				.SaveChangesAsync(cancellationToken)
 				.ConfigureAwait(false);
 			return existingItem.AsToDo();
@@ -69,9 +69,9 @@ namespace CSharpToDo.Repositories.Ef
 
 		public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken)
 		{
-			 var  rowsAffected = await _dbContext
+			 var  rowsAffected = await _dbContext//So would this work if defined as an integer?
 				.ToDos
-				.Where(t => t.Id == id)
+				.Where(t => t.Id == id)//Use where so we don't make server requests twice?
 				.ExecuteDeleteAsync(cancellationToken)
 				.ConfigureAwait(false);
 

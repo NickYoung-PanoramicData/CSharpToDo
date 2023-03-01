@@ -29,5 +29,11 @@
 		<ProjectReference Include="..\Shared\CSharpToDo.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Update="usersecrets.example.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
 
 </Project>
