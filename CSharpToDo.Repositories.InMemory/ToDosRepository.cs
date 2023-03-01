@@ -11,7 +11,7 @@ namespace CSharpToDo.Repositories.InMemory
 {
 	internal class ToDosRepository : IToDosRepository
 	{
-		private readonly static IDictionary<int, ToDo> _toDos = new ConcurrentDictionary<int, ToDo>();
+		private readonly IDictionary<int, ToDo> _toDos = new ConcurrentDictionary<int, ToDo>();
 
 		public Task<IEnumerable<ToDo>> GetListAsync(CancellationToken _)
 		{

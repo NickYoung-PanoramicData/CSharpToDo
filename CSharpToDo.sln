@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpToDo.Repositories.Ef"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpToDo.Repositories.InMemory", "CSharpToDo.Repositories.InMemory\CSharpToDo.Repositories.InMemory.csproj", "{E6C081C8-B8A9-415C-A9D6-AAFEFF4D06E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpToDo.Tests", "CSharpToDo.Tests\CSharpToDo.Tests.csproj", "{1001A92C-BC4E-481B-9DAE-483170F20832}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E6C081C8-B8A9-415C-A9D6-AAFEFF4D06E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6C081C8-B8A9-415C-A9D6-AAFEFF4D06E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6C081C8-B8A9-415C-A9D6-AAFEFF4D06E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1001A92C-BC4E-481B-9DAE-483170F20832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1001A92C-BC4E-481B-9DAE-483170F20832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1001A92C-BC4E-481B-9DAE-483170F20832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1001A92C-BC4E-481B-9DAE-483170F20832}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
