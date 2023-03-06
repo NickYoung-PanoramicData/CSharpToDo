@@ -14,9 +14,11 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="PanoramicData.Blazor" Version="2.1.86" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\CSharpToDo.Api\CSharpToDo.Api.csproj" />
 		<ProjectReference Include="..\Shared\CSharpToDo.Shared.csproj" />
 	</ItemGroup>
 

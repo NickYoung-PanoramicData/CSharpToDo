@@ -13,10 +13,7 @@ namespace CSharpToDo.Repositories.InMemory
 	{
 		private readonly IDictionary<int, ToDo> _toDos = new ConcurrentDictionary<int, ToDo>();
 
-		public Task<IEnumerable<ToDo>> GetListAsync(CancellationToken _)
-		{
-			return Task.FromResult(_toDos.Values.AsEnumerable<ToDo>());
-		}
+		public Task<IEnumerable<ToDo>> GetListAsync(CancellationToken _) => Task.FromResult(_toDos.Values.AsEnumerable<ToDo>());
 
 		public Task<ToDo?> GetAsync(int id, CancellationToken _)
 		{

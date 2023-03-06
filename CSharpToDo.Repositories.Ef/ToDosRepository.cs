@@ -20,23 +20,17 @@ namespace CSharpToDo.Repositories.Ef
 			_dbContext = dbContext;
 		}
 
-		public async Task<IEnumerable<ToDo>> GetListAsync(CancellationToken cancellationToken)
-		{
-			return await _dbContext//Database variable
+		public async Task<IEnumerable<ToDo>> GetListAsync(CancellationToken cancellationToken) => await _dbContext//Database variable
 				.ToDos//Records within database
 				.Select(t => t.AsToDo())//Projects all elements of the sequence
 				.ToListAsync(cancellationToken)//Built in method that casts to a list
 				.ConfigureAwait(false);
-		}
 
-		public async Task<ToDo?> GetAsync(int id, CancellationToken cancellationToken)
-		{
-			return (await _dbContext//Database variable
+		public async Task<ToDo?> GetAsync(int id, CancellationToken cancellationToken) => (await _dbContext//Database variable
 				.ToDos//Records within database
 				.FirstOrDefaultAsync(t => t.Id == id, cancellationToken)//Fetches the first element of the list thats Id is equal the one specified in the parameter of the method
 				.ConfigureAwait(false))//Ends the await
 				?.AsToDo();//Cast to type ToDo
-		}
 
 		public async Task<ToDo> AddAsync(ToDo item, CancellationToken cancellationToken)
 		{

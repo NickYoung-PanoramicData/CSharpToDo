@@ -18,13 +18,9 @@ namespace CSharpToDo.Repositories.Ef
 
 		public DbSet<ToDoModel> ToDos { get; set; } = null!;
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<ToDoModel>()
+		protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.Entity<ToDoModel>()
 			.Property(t => t.Name)
 			.HasMaxLength(250);
-
-		}
 
 		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
 		{
