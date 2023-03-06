@@ -20,28 +20,22 @@ namespace CSharpToDo.Repositories.Ef.Models
 
 		public DateTime? LastModifiedUtc { get; set; }
 
-		internal ToDo AsToDo()
+		internal ToDo AsToDo() => new ToDo
 		{
-			return new ToDo
-			{
-				Id = Id,
-				Name = Name,
-				IsCompleted = IsCompleted,
-				CreatedUtc = CreatedUtc,
-				LastModifiedUtc = LastModifiedUtc
-			};
-		}
+			Id = Id,
+			Name = Name,
+			IsCompleted = IsCompleted,
+			CreatedUtc = CreatedUtc,
+			LastModifiedUtc = LastModifiedUtc
+		};
 
-		internal static ToDoModel AsToDoModel(ToDo toDo)
+		internal static ToDoModel AsToDoModel(ToDo toDo) => new ToDoModel
 		{
-			return new ToDoModel
-			{
-				Id = toDo.Id,
-				Name = toDo.Name,
-				IsCompleted = toDo.IsCompleted,
-				CreatedUtc = toDo.CreatedUtc,
-				LastModifiedUtc = toDo.LastModifiedUtc
-			};
-		}
+			Id = toDo.Id,
+			Name = toDo.Name,
+			IsCompleted = toDo.IsCompleted,
+			CreatedUtc = toDo.CreatedUtc,
+			LastModifiedUtc = toDo.LastModifiedUtc
+		};
 	}
 }

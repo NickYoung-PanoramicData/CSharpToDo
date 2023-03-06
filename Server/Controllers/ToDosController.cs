@@ -1,8 +1,6 @@
 ﻿using CSharpToDo.Data.Interfaces;
 using CSharpToDo.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using System.Collections.Concurrent;
 
 namespace CSharpToDo.Server.Controllers
 {
@@ -10,7 +8,7 @@ namespace CSharpToDo.Server.Controllers
 	[ApiController]
 	public class ToDosController : ControllerBase
 	{
-		private readonly static IDictionary<int, ToDo> _toDos = new ConcurrentDictionary<int, ToDo>();
+		//private static readonly IDictionary<int, ToDo> _toDos = new ConcurrentDictionary<int, ToDo>();
 		private readonly IToDosRepository _repository;
 
 		public ToDosController(IToDosRepository repository)
@@ -20,10 +18,7 @@ namespace CSharpToDo.Server.Controllers
 
 		// GET: api/<ToDosController>
 		[HttpGet]
-		public Task<IEnumerable<ToDo>> GetAsync(CancellationToken cancellationToken)
-		{
-			return _repository.GetListAsync(cancellationToken);
-		}
+		public Task<IEnumerable<ToDo>> GetAsync(CancellationToken cancellationToken) => _repository.GetListAsync(cancellationToken);
 
 		// GET api/<ToDosController>/5
 		[HttpGet("{id}")]
@@ -43,10 +38,7 @@ namespace CSharpToDo.Server.Controllers
 		// POST api/<ToDosController>
 		[HttpPost]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task PostAsync([FromBody] ToDo value, CancellationToken cancellationToken)
-		{
-			await _repository.AddAsync(value, cancellationToken);
-		}
+		public async Task PostAsync([FromBody] ToDo value, CancellationToken cancellationToken) => await _repository.AddAsync(value, cancellationToken);
 
 		// PUT api/<ToDosController>/5
 		[HttpPut("{id}")]
