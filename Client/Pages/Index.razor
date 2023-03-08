@@ -2,8 +2,31 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h3>To Dos</h3>
+@*
+<AdminToolbar @bind-SearchText="@_searchText"
+Create="OnCreate"
+DataProvider="_dataProvider"
+Edit="OnEdit"
+EntityTypeName="ToDo"
+Refresh="RefreshAsync"
+SelectedItem="_selectedItem"
+ShowDelete="true"
+ShowSearchField="false"
+TItem="ToDo"/>*@
 
-Welcome to your new app.
+<PDTable @ref = "_table"
+		AutoLoad = "false"
+		DataProvider="_dataProvider"
+		DoubleClick="OnEdit"
+		KeyField="t => t.Id"
+		PageCriteria = "_pageCriteria"
+		@bind-SearchText = "@_searchText"
+		SelectionMode="TableSelectionMode.Single"
+		SelectionChanged="OnSelectionChanged"
+		ShowPager="false"
+		TItem="ToDo"
+		RowClass="GetRowClass">
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+</PDTable>

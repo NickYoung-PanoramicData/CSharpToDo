@@ -1,0 +1,34 @@
+﻿@typeparam TItem
+
+<PDForm @ref = "_form"
+	TItem = "TItem"
+	DataProvider="DataProvider"
+	HelpTextMode="HelpTextMode.Hidden"
+	Item = "_item"
+	Created = "OnRefreshAsync"
+	Updated = "OnRefreshAsync"
+	Deleted = "OnRefreshAsync">
+
+	<PDModal @ref = "_formPopUp"
+		Size="@Size">
+
+		<Header>
+			<PDFormHeader TItem = "TItem"
+				ItemDescription = "@((x)=> GetItemName(x))"/>
+		</Header>
+
+		<ChildContent>
+			<PDFormBody TitleWidth="TitleWidth"
+				Table = "Table"
+				TItem = "TItem"/>
+		</ChildContent>
+
+		<Footer>
+			<PDFormFooter TItem = "TItem"
+				Click = "OnFormButtonClickAsync"
+				ShowDelete = "true"/>
+		</Footer>
+
+	</PDModal>
+
+</PDForm>

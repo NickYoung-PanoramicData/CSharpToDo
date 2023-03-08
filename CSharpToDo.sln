@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpToDo.Repositories.InM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpToDo.Tests", "CSharpToDo.Tests\CSharpToDo.Tests.csproj", "{1001A92C-BC4E-481B-9DAE-483170F20832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpToDo.Api", "CSharpToDo.Api\CSharpToDo.Api.csproj", "{3E74A2B7-6DDD-4193-8D5E-B0637848806B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpToDo.Api", "CSharpToDo.Api\CSharpToDo.Api.csproj", "{3E74A2B7-6DDD-4193-8D5E-B0637848806B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
