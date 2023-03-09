@@ -27,7 +27,7 @@ public partial class AdminToolbar<TItem> where TItem : class, IIdentifiedEntity,
 	[EditorRequired]
 	public string EntityTypeName { get; set; } = string.Empty;
 
-	public Func<TItem?, string>? GetItemName { get; set; } = (x) => x is null
+	public Func<TItem?, string> GetItemName { get; set; } = (x) => x is null
 	? string.Empty
 	: x is INamedIdentifiedEntity namedEntity
 		? namedEntity.Name
@@ -37,7 +37,7 @@ public partial class AdminToolbar<TItem> where TItem : class, IIdentifiedEntity,
 	public EventCallback<string> Refresh { get; set; }
 
 	[Parameter]
-	public string SearchText { get; set; } = string.Empty;
+	public string? SearchText { get; set; } = string.Empty;
 
 	[Parameter]
 	public bool ShowDelete { get; set; } = true;
@@ -51,11 +51,11 @@ public partial class AdminToolbar<TItem> where TItem : class, IIdentifiedEntity,
 	[Parameter]
 	public TItem? SelectedItem { get; set; }
 
-	private async Task OnDeleteConfirmedAsync(CancellationToken cancellationToken)
+	private async Task OnDeleteConfirmedAsync()
 	{
 		if (DataProvider is not null)
 		{
-			_ = await DataProvider.DeleteAsync(SelectedItem!, cancellationToken).ConfigureAwait(true);
+			_ = await DataProvider.DeleteAsync(SelectedItem!, CancellationToken.None).ConfigureAwait(true);
 		}
 
 		await Refresh.InvokeAsync(SearchText).ConfigureAwait(true);

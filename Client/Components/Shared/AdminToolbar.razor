@@ -1,1 +1,49 @@
 ﻿@typeparam TItem
+
+<div class="admin-toolbar">
+	<PDToolbar>
+		<PDToolbarButton Click="Create"
+						 CssClass="btn-primary"
+						 IconCssClass="fas fa-plus"
+						 Size="Constants.ButtonSize"
+						 Text="Create" />
+
+		<PDToolbarButton Click="Edit"
+						 CssClass="btn-secondary"
+						 IconCssClass="fas fa-edit"
+						 IsEnabled="SelectedItem is not null && SelectedItem.Id > 0"
+						 Size="Constants.ButtonSize"
+						 Text="Edit" />
+
+		@if (ShowSearchField)
+		{
+			<PDToolbarTextbox Size="Constants.ButtonSize"
+						  Value="@SearchText"
+						  ValueChanged="OnSearchTextChanged"/>
+		}
+
+		<PDToolbarButton Click="OnRefreshAsync"
+						 IconCssClass="fas fa-sync"
+						 Size="Constants.ButtonSize"
+						 Text="Refresh" />
+
+		@if(ShowDelete)
+		{
+			<PDToolbarButton Click="@(()=> _confirmDialog!.ShowAsync())"
+						CssClass="btn-danger"
+						 IconCssClass="fas fa-trash-alt"
+						 IsEnabled="SelectedItem is not null && SelectedItem.Id > 0"
+						 ShiftRight="true"
+						 Size="Constants.ButtonSize"
+						 Text="Delete" />
+		}
+	</PDToolbar>
+
+	<ConfirmDialog @ref="_confirmDialog"
+		Okay="OnDeleteConfirmedAsync"
+		Title="@($"Delete {EntityTypeName}?")">
+		<p>
+			@($"Are you sure you want to delete '{GetItemName(SelectedItem)}'?")
+		</p>
+	</ConfirmDialog>
+</div>
