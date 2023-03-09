@@ -25,11 +25,10 @@ public partial class Index
 	[Inject]
 	public ApiClient? ApiClient { get; set; }
 
-
-
-	protected override async Task OnInitializedAsync()
+	protected override Task OnInitializedAsync()
 	{
 		_dataProvider = new(ApiClient!);
+		return Task.CompletedTask;
 	}
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)

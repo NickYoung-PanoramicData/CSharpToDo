@@ -1,6 +1,7 @@
-using CSharpToDo.Client;
+using CSharpToDo.Api;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using PanoramicData.Blazor.Extensions;
 
 namespace CSharpToDo.Client
 {
@@ -12,7 +13,9 @@ namespace CSharpToDo.Client
 			builder.RootComponents.Add<App>("#app");
 			builder.RootComponents.Add<HeadOutlet>("head::after");
 
+			builder.Services.AddPanoramicDataBlazor();
 			builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+			builder.Services.AddScoped(sp => new ApiClient(new ApiClientOptions { BaseUrl = builder.HostEnvironment.BaseAddress }, sp.GetRequiredService<ILogger<ApiClient>>()));
 
 			await builder.Build().RunAsync();
 		}

@@ -2,7 +2,8 @@
 public class ApiClientOptions
 {
 	public string BaseUrl { get; set; } = string.Empty;
-	public double HttpClientTimeoutSeconds { get; internal set; }
+
+	public double HttpClientTimeoutSeconds { get; internal set; } = 100;
 
 	public void Validate()
 	{

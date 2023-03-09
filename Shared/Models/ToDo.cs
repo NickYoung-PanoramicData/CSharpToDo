@@ -2,7 +2,7 @@
 
 namespace CSharpToDo.Shared.Models
 {
-	public class ToDo : IIdentifiedEntity
+	public class ToDo : INamedIdentifiedEntity
 	{
 		public int Id { get; set; }
 
