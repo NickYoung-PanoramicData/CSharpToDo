@@ -5,28 +5,73 @@
 <h3>To Dos</h3>
 
 <AdminToolbar @bind-SearchText=@_searchText
-Create="OnCreate"
-DataProvider="_dataProvider"
-Edit="OnEdit"
-EntityTypeName="ToDo"
-Refresh="RefreshAsync"
-SelectedItem="_selectedItem"
-ShowDelete="true"
-ShowSearchField="false"
-TItem="ToDo"/>
+			  Create="OnCreate"
+			  DataProvider="_dataProvider"
+			  Edit="OnEdit"
+			  EntityTypeName="To do"
+			  Refresh="RefreshAsync"
+			  SelectedItem="_selectedItem"
+			  ShowDelete="true"
+			  ShowSearchField="true"
+			  TItem="ToDo" />
 
-<PDTable @ref = "_table"
-		AutoLoad = "false"
-		DataProvider="_dataProvider"
-		DoubleClick="OnEdit"
-		KeyField="t => t.Id"
-		PageCriteria = "_pageCriteria"
-		@bind-SearchText = "@_searchText"
-		SelectionMode="TableSelectionMode.Single"
-		SelectionChanged="OnSelectionChanged"
-		ShowPager="false"
-		TItem="ToDo"
-		RowClass="GetRowClass">
+<PDTable @ref="_table"
+		 AutoLoad="false"
+		 DataProvider="_dataProvider"
+		 DoubleClick="OnEdit"
+		 KeyField="t => t.Id"
+		 PageCriteria="_pageCriteria"
+		 @bind-SearchText="@_searchText"
+		 SelectionMode="TableSelectionMode.Single"
+		 SelectionChanged="OnSelectionChanged"
+		 ShowPager="false"
+		 TItem="ToDo"
+		 RowClass="GetRowClass">
 
+	<PDColumn Field="t=> t.Name"
+			  ShowInDelete="(_)=> true"
+			  Sortable="true"
+			  TItem="ToDo" />
+
+	<PDColumn Field="t=> t.IsCompleted"
+			  Sortable="true"
+			  TItem="ToDo"
+			  Title="Is Completed">
+
+		<Template>
+			@if (context.IsCompleted)
+			{
+				<i class="fa fa-check fa-fw"
+			   title="Is Completed">
+
+				</i>
+			}
+			else
+			{
+				<i class="fa fa-times fa-fw"
+			   title="Is Completed">
+
+				</i>
+			}
+		</Template>
+	</PDColumn>
+
+	<PDColumn Field="t=> t.CreatedUtc"
+			  Format="yyyy-MM-dd HH:mm"
+			  ShowInCreate="(_)=> false"
+			  ShowInDelete="(_)=> false"
+			  ShowInEdit="(_)=> false"
+			  Sortable="true"
+			  TdClass="text-nowrap"
+			  TItem="ToDo"
+			  Title="Time Created"/>
 
 </PDTable>
+
+<EditDialog @ref="_editDialog"
+			TItem="ToDo"
+			DataProvider="_dataProvider"
+			Refresh="@(()=> RefreshAsync())"
+			Size="ModalSizes.Medium"
+			Table="_table"
+			TitleWidth="200" />
