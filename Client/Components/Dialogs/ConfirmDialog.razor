@@ -1,5 +1,35 @@
-﻿<h3>ConfirmDialog</h3>
+﻿@inherits DialogBase
 
-@code {
+<PDModal
+	@ref = "Modal"
+	CloseOnEscape = "false"
+	Size = "ModalSizes.Large"
+	Title="@Title">
 
-}
+	<ChildContent>
+		@if(ChildContent is null)
+		{
+			<div>
+				@Caption
+			</div>
+		}
+		else
+		{
+			@ChildContent
+		}
+	</ChildContent>
+
+	<Footer>
+		<div class = "toolbar">
+			<PDButton
+				Click = "OnOkay"
+				CssClass="btn-primary"
+				Text="@ConfirmButtonText"/>
+
+			<PDButton Click="OnCancel"
+					  CssClass="btn-light ms-2"
+					  Text="@CancelButtonText" />
+		</div>
+	</Footer>
+</PDModal>
+

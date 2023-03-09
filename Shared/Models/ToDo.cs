@@ -1,6 +1,8 @@
-﻿namespace CSharpToDo.Shared.Models
+﻿using CSharpToDo.Shared.Interfaces;
+
+namespace CSharpToDo.Shared.Models
 {
-	public class ToDo
+	public class ToDo : IIdentifiedEntity
 	{
 		public int Id { get; set; }
 

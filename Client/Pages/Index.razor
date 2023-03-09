@@ -3,8 +3,8 @@
 <PageTitle>Index</PageTitle>
 
 <h3>To Dos</h3>
-@*
-<AdminToolbar @bind-SearchText="@_searchText"
+
+<AdminToolbar @bind-SearchText=@_searchText
 Create="OnCreate"
 DataProvider="_dataProvider"
 Edit="OnEdit"
@@ -13,7 +13,7 @@ Refresh="RefreshAsync"
 SelectedItem="_selectedItem"
 ShowDelete="true"
 ShowSearchField="false"
-TItem="ToDo"/>*@
+TItem="ToDo"/>
 
 <PDTable @ref = "_table"
 		AutoLoad = "false"
