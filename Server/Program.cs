@@ -1,6 +1,4 @@
 using CSharpToDo.Server.Helpers;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CSharpToDo
 {
