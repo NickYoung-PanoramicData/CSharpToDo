@@ -4,15 +4,14 @@
 
 <h3>To Dos</h3>
 
-<AdminToolbar @bind-SearchText=@_searchText
-			  Create="OnCreate"
+<AdminToolbar Create="OnCreate"
 			  DataProvider="_dataProvider"
 			  Edit="OnEdit"
 			  EntityTypeName="To do"
 			  Refresh="RefreshAsync"
 			  SelectedItem="_selectedItem"
 			  ShowDelete="true"
-			  ShowSearchField="true"
+			  ShowSearchField="false"
 			  TItem="ToDo" />
 
 <PDTable @ref="_table"
@@ -21,7 +20,6 @@
 		 DoubleClick="OnEdit"
 		 KeyField="t => t.Id"
 		 PageCriteria="_pageCriteria"
-		 @bind-SearchText="@_searchText"
 		 SelectionMode="TableSelectionMode.Single"
 		 SelectionChanged="OnSelectionChanged"
 		 ShowPager="false"

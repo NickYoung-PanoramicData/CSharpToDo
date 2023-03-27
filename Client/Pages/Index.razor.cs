@@ -18,8 +18,6 @@ public partial class Index
 
 	private EditDialog<ToDo>? _editDialog;
 
-	private string _searchText = string.Empty;
-
 	private ToDo? _selectedItem;
 
 	[Inject]
