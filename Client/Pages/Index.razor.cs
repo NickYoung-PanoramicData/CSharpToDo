@@ -4,6 +4,7 @@ using CSharpToDo.Client.DataProviders;
 using CSharpToDo.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using PanoramicData.Blazor;
+using PanoramicData.Blazor.Interfaces;
 using PanoramicData.Blazor.Models;
 
 namespace CSharpToDo.Client.Pages;
@@ -22,6 +23,9 @@ public partial class Index
 
 	[Inject]
 	public ApiClient? ApiClient { get; set; }
+
+	[Inject]
+	protected IBlockOverlayService BlockOverlayService { get; set; } = null!;
 
 	protected override Task OnInitializedAsync()
 	{
@@ -58,5 +62,19 @@ public partial class Index
 	private static string GetRowClass(ToDo toDo)
 	{
 		return toDo.IsCompleted ? "" : "todo-disabled";
+	}
+
+	//Remove after demo
+	protected async Task TriggerDelayAsync()
+	{
+		BlockOverlayService.Show();
+		try
+		{
+			await Task.Delay(TimeSpan.FromSeconds(3)).ConfigureAwait(true);
+		}
+		finally
+		{
+			BlockOverlayService.Hide();
+		}
 	}
 }
