@@ -25,11 +25,11 @@ public partial class Index
 	public ApiClient? ApiClient { get; set; }
 
 	[Inject]
-	protected IBlockOverlayService BlockOverlayService { get; set; } = null!;
+	public IBlockOverlayService BlockOverlayService { get; set; } = null!;
 
 	protected override Task OnInitializedAsync()
 	{
-		_dataProvider = new(ApiClient!);
+		_dataProvider = new(ApiClient!, BlockOverlayService!);
 		return Task.CompletedTask;
 	}
 
@@ -62,19 +62,5 @@ public partial class Index
 	private static string GetRowClass(ToDo toDo)
 	{
 		return toDo.IsCompleted ? "" : "todo-disabled";
-	}
-
-	//Remove after demo
-	protected async Task TriggerDelayAsync()
-	{
-		BlockOverlayService.Show();
-		try
-		{
-			await Task.Delay(TimeSpan.FromSeconds(3)).ConfigureAwait(true);
-		}
-		finally
-		{
-			BlockOverlayService.Hide();
-		}
 	}
 }
