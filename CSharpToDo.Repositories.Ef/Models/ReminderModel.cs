@@ -2,35 +2,33 @@
 using CSharpToDo.Shared.Models;
 
 namespace CSharpToDo.Repositories.Ef.Models;
-
-public class ToDoModel : IAuditable
+public class ReminderModel : IAuditable
 {
 	public int Id { get; set; }
 
 	public string Name { get; set; } = string.Empty;
 
-	public bool IsCompleted { get; set; }
+	public DateTime DueUtc { get; set; }
 
 	public DateTime CreatedUtc { get; set; } = DateTime.Now;
 
 	public DateTime? LastModifiedUtc { get; set; }
 
-	internal ToDo AsToDo() => new ToDo
+	internal Reminder AsReminder() => new Reminder
 	{
 		Id = Id,
 		Name = Name,
-		IsCompleted = IsCompleted,
+		DueUtc = DueUtc,
 		CreatedUtc = CreatedUtc,
 		LastModifiedUtc = LastModifiedUtc
 	};
 
-	internal static ToDoModel AsToDoModel(ToDo toDo) => new ToDoModel
+	internal static ReminderModel AsReminderModel(Reminder reminder) => new ReminderModel
 	{
-		Id = toDo.Id,
-		Name = toDo.Name,
-		IsCompleted = toDo.IsCompleted,
-		CreatedUtc = toDo.CreatedUtc,
-		LastModifiedUtc = toDo.LastModifiedUtc
+		Id = reminder.Id,
+		Name = reminder.Name,
+		DueUtc = reminder.DueUtc,
+		CreatedUtc = reminder.CreatedUtc,
+		LastModifiedUtc = reminder.LastModifiedUtc
 	};
 }
-

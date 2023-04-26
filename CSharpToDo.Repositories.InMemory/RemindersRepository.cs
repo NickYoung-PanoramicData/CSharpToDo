@@ -1,13 +1,14 @@
-﻿using CSharpToDo.Shared.Models;
+﻿using CSharpToDo.Data.Interfaces;
+using CSharpToDo.Shared.Models;
 using System.Collections.Concurrent;
 
 namespace CSharpToDo.Repositories.InMemory
 {
-	internal class RemindersRepository //: IToDosRepository
+	internal class RemindersRepository : IRemindersRepository
 	{
 		private readonly IDictionary<int, Reminder> _reminders = new ConcurrentDictionary<int, Reminder>();
 
-		//public Task<IEnumerable<Reminder>> GetListAsync(CancellationToken _) => Task.FromResult(.Values.AsEnumerable<Reminder>());
+		public Task<IEnumerable<Reminder>> GetListAsync(CancellationToken _) => Task.FromResult(_reminders.Values.AsEnumerable<Reminder>());
 
 		public Task<Reminder?> GetAsync(int id, CancellationToken _)
 		{

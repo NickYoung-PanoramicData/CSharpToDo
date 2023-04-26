@@ -1,5 +1,3 @@
-using CSharpToDo.Server.Helpers;
-
 namespace CSharpToDo
 {
 	public class Program
@@ -14,8 +12,9 @@ namespace CSharpToDo
 			builder.Services.AddRazorPages();
 			builder.Services.AddSwaggerGen();
 
-			//builder.Services.AddInMemoryRepository();
-			builder.Services.AddEfRepository(builder.Configuration);
+			//TODO: Switch out to EF repository when ready
+			builder.Services.AddInMemoryRepository();
+			//builder.Services.AddEfRepository(builder.Configuration);
 
 			var app = builder.Build();
 
@@ -45,9 +44,10 @@ namespace CSharpToDo
 			app.MapControllers();
 			app.MapFallbackToFile("index.html");
 
-			await DbContextHelper
+			//TODO: Uncomment this line to create the database if it doesn't exist
+			/*await DbContextHelper
 				.EnsureDatabaseOkAsync(app)
-				.ConfigureAwait(false);
+				.ConfigureAwait(false);*/
 
 			app.Run();
 		}

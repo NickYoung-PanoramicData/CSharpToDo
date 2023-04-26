@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharpToDo.Repositories.Ef.Migrations
 {
-    [DbContext(typeof(ToDoDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class ToDoDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

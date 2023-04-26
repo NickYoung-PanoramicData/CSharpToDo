@@ -5,6 +5,7 @@ namespace CSharpToDo.Api.Interfaces;
 
 public interface IToDos
 {
+	//TODO: Make IReminders
 	[Get("/api/todos")]
 	Task<List<ToDo>> GetAllAsync(CancellationToken cancellationToken);
 

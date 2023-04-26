@@ -3,7 +3,7 @@
 
 namespace CSharpToDo.Data.Interfaces
 {
-	public interface IReminderRepository
+	public interface IRemindersRepository
 	{
 		Task<IEnumerable<Reminder>> GetListAsync(CancellationToken cancellationToken);
 
