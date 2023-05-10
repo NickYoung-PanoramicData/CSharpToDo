@@ -14,7 +14,7 @@ public class ReminderModel : IAuditable
 
 	public DateTime? LastModifiedUtc { get; set; }
 
-	internal Reminder AsReminder() => new Reminder
+	internal Reminder AsReminder() => new()
 	{
 		Id = Id,
 		Name = Name,
@@ -23,7 +23,7 @@ public class ReminderModel : IAuditable
 		LastModifiedUtc = LastModifiedUtc
 	};
 
-	internal static ReminderModel AsReminderModel(Reminder reminder) => new ReminderModel
+	internal static ReminderModel AsReminderModel(Reminder reminder) => new()
 	{
 		Id = reminder.Id,
 		Name = reminder.Name,

@@ -2,5 +2,56 @@
 
 <PageTitle>Reminders</PageTitle>
 
-<h1>Reminders</h1>
+<h3>Reminders</h3>
+
+<AdminToolbar Create="OnCreate"
+			  DataProvider="_dataProvider"
+			  Edit="OnEdit"
+			  EntityTypeName="To do"
+			  Refresh="RefreshAsync"
+			  SelectedItem="_selectedItem"
+			  ShowDelete="true"
+			  ShowSearchField="false"
+			  TItem="Reminder" />
+
+<PDTable @ref="_table"
+		 AutoLoad="false"
+		 DataProvider="_dataProvider"
+		 DoubleClick="OnEdit"
+		 KeyField="t => t.Id"
+		 PageCriteria="_pageCriteria"
+		 SelectionMode="TableSelectionMode.Single"
+		 SelectionChanged="OnSelectionChanged"
+		 ShowPager="false"
+		 TItem="Reminder">
+
+	<PDColumn Field="t=> t.Name"
+			  ShowInDelete="(_)=> true"
+			  Sortable="true"
+			  TItem="Reminder" />
+
+	<PDColumn Field='t => t.DueUtc'
+			  Sortable="true"
+			  TItem="Reminder"
+			  Title="Date Due" />
+
+	<PDColumn Field="t=> t.CreatedUtc"
+			  Format="yyyy-MM-dd HH:mm"
+			  ShowInCreate="(_)=> false"
+			  ShowInDelete="(_)=> false"
+			  ShowInEdit="(_)=> false"
+			  Sortable="true"
+			  TdClass="text-nowrap"
+			  TItem="Reminder"
+			  Title="Time Created"/>
+
+</PDTable>
+
+<EditDialog @ref="_editDialog"
+			TItem="Reminder"
+			DataProvider="_dataProvider"
+			Refresh="@(()=> RefreshAsync())"
+			Size="ModalSizes.Medium"
+			Table="_table"
+			TitleWidth="200" />
 
