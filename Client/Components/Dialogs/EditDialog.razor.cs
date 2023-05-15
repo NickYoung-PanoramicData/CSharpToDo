@@ -61,7 +61,7 @@ public partial class EditDialog<TItem> where TItem : class, IIdentifiedEntity, n
 
 	private async Task OnRefreshAsync()
 	{
-		await _formPopUp.HideAsync().ConfigureAwait(true);
+		await _formPopUp!.HideAsync().ConfigureAwait(true);
 		await Refresh.InvokeAsync().ConfigureAwait(true);
 	}
 }

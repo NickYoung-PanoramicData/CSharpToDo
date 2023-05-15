@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CSharpToDo.Repositories.Ef
 {
-	internal class ToDosRepository : IToDosRepository
+	public sealed class ToDosRepository : IToDosRepository
 	{
 		private readonly AppDbContext _dbContext;
 

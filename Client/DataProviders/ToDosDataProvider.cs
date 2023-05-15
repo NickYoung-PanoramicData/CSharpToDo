@@ -47,7 +47,7 @@ public class ToDosDataProvider : DataProviderBase<ToDo>
 		}
 	}
 
-	public override async Task<OperationResponse> UpdateAsync(ToDo item, IDictionary<string, object?> delta, CancellationToken cancellationToken)
+	public override async Task<OperationResponse> UpdateAsync(ToDo item, IDictionary<string, object> delta, CancellationToken cancellationToken)
 	{
 		try
 		{

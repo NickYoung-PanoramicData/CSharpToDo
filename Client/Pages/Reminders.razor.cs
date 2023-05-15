@@ -21,6 +21,8 @@ public partial class Reminders
 
 	private Reminder? _selectedItem;
 
+	private DateTime _currentTime = DateTime.Now;
+
 	[Inject]
 	public ApiClient? ApiClient { get; set; }
 

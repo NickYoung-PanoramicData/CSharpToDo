@@ -1,9 +1,10 @@
 ﻿using CSharpToDo.Api;
-using CSharpToDo.Client.Components.Dialogs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using PanoramicData.Blazor;
 using PanoramicData.Blazor.Models;
+
+namespace CSharpToDo.Client.Components.Dialogs;
 
 public abstract class DialogBase : ComponentBase, IDisposable
 {

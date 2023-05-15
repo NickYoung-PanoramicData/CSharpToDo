@@ -49,7 +49,7 @@ namespace CSharpToDo
 				.EnsureDatabaseOkAsync(app)
 				.ConfigureAwait(false);*/
 
-			app.Run();
+			await app.RunAsync();
 		}
 	}
 }

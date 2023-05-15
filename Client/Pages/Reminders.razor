@@ -7,7 +7,7 @@
 <AdminToolbar Create="OnCreate"
 			  DataProvider="_dataProvider"
 			  Edit="OnEdit"
-			  EntityTypeName="To do"
+			  EntityTypeName="Reminder"
 			  Refresh="RefreshAsync"
 			  SelectedItem="_selectedItem"
 			  ShowDelete="true"
@@ -30,10 +30,29 @@
 			  Sortable="true"
 			  TItem="Reminder" />
 
-	<PDColumn Field='t => t.DueUtc'
+	<PDColumn Field="t=> t.DueUtc"
+			  ShowInCreate="(_)=> true"
+			  ShowInDelete="(_)=> true"
+			  ShowInEdit="(_)=> true"
 			  Sortable="true"
 			  TItem="Reminder"
-			  Title="Date Due" />
+			  Title="Due Date">
+		<!--TODO: Add better date entry and prevent dates before the current from being entered-->
+		<Template>
+			@if (context.DueUtc == DateTime.Today)
+			{
+				<p>Today at @context.DueUtc.ToString("HH:mm")</p>
+			}
+			else if (context.DueUtc.Year == DateTime.Now.Year)
+			{
+				<p>@context.DueUtc.ToString("dd\\t\\h MMM HH:mm")</p>
+			}
+			else
+			{
+				<p>@context.DueUtc.ToString("dd\\t\\h MMM yyyy HH:mm")</p>
+			}
+		</Template>
+	</PDColumn>
 
 	<PDColumn Field="t=> t.CreatedUtc"
 			  Format="yyyy-MM-dd HH:mm"
@@ -43,8 +62,7 @@
 			  Sortable="true"
 			  TdClass="text-nowrap"
 			  TItem="Reminder"
-			  Title="Time Created"/>
-
+			  Title="Time Created" />
 </PDTable>
 
 <EditDialog @ref="_editDialog"
