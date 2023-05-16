@@ -28,7 +28,12 @@
 	<PDColumn Field="t=> t.Name"
 			  ShowInDelete="(_)=> true"
 			  Sortable="true"
-			  TItem="Reminder" />
+			  TItem="Reminder">
+
+			  <EditTemplate>
+				  <input type="text" name="NameInput" @bind-value="context.Name"/>
+			  </EditTemplate>
+	</PDColumn>
 
 	<PDColumn Field="t=> t.DueUtc"
 			  ShowInCreate="(_)=> true"
@@ -37,9 +42,9 @@
 			  Sortable="true"
 			  TItem="Reminder"
 			  Title="Due Date">
-		<!--TODO: Add better date entry and prevent dates before the current from being entered-->
+		<!--TODO: Prevent dates before the current from being entered, min isnt working-->
 		<Template>
-			@if (context.DueUtc == DateTime.Today)
+			@if (context.DueUtc.Date == DateTime.Today)
 			{
 				<p>Today at @context.DueUtc.ToString("HH:mm")</p>
 			}
@@ -52,6 +57,10 @@
 				<p>@context.DueUtc.ToString("dd\\t\\h MMM yyyy HH:mm")</p>
 			}
 		</Template>
+		<EditTemplate>
+
+			<input type="datetime-local" name="DueDateInput" min="@DateTime.Now.ToString("s")" @bind-value="context.DueUtc"/>
+		</EditTemplate>
 	</PDColumn>
 
 	<PDColumn Field="t=> t.CreatedUtc"
@@ -80,5 +89,6 @@
 			Refresh="@(()=> RefreshAsync())"
 			Size="ModalSizes.Medium"
 			Table="_table"
-			TitleWidth="200" />
+			TitleWidth="200">
+</EditDialog>
 

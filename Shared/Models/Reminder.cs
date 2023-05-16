@@ -10,7 +10,7 @@ namespace CSharpToDo.Shared.Models
 
 		public DateTime CreatedUtc { get; set; } = DateTime.Now;
 
-		public DateTime DueUtc { get; set; }
+		public DateTime DueUtc { get; set; } = DateTime.Now.AddDays(1);
 
 		public DateTime? LastModifiedUtc { get; set; }
 
