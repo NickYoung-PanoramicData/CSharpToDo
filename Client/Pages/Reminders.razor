@@ -55,14 +55,23 @@
 	</PDColumn>
 
 	<PDColumn Field="t=> t.CreatedUtc"
-			  Format="yyyy-MM-dd HH:mm"
 			  ShowInCreate="(_)=> false"
 			  ShowInDelete="(_)=> false"
 			  ShowInEdit="(_)=> false"
 			  Sortable="true"
-			  TdClass="text-nowrap"
 			  TItem="Reminder"
-			  Title="Time Created" />
+			  Title="Time Created">
+		<Template>
+			@if (context.CreatedUtc.Year == DateTime.Now.Year)
+			{
+				<p>@context.CreatedUtc.ToString("dd\\t\\h MMM HH:mm")</p>
+			}
+			else
+			{
+				<p>@context.CreatedUtc.ToString("dd\\t\\h MMM yyyy HH:mm")</p>
+			}
+		</Template>
+	</PDColumn>
 </PDTable>
 
 <EditDialog @ref="_editDialog"
