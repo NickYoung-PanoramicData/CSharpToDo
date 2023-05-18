@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(configuration.GetConnectionString("ToDos")));
 			services.AddScoped<IToDosRepository, ToDosRepository>();
-			//services.AddScoped<IToDosRepository, RemindersRepository>();
+			services.AddScoped<IRemindersRepository, RemindersRepository>();
 			return services;
 		}
 	}
