@@ -12,8 +12,6 @@ namespace CSharpToDo
 			builder.Services.AddRazorPages();
 			builder.Services.AddSwaggerGen();
 
-			//TODO: Switch out to EF repository when ready
-			//builder.Services.AddInMemoryRepository();
 			builder.Services.AddEfRepository(builder.Configuration);
 
 			var app = builder.Build();
