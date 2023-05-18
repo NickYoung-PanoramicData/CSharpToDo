@@ -42,7 +42,7 @@ namespace CSharpToDo
 			app.MapControllers();
 			app.MapFallbackToFile("index.html");
 
-			//TODO: Uncomment this line to create the database if it doesn't exist
+			//Uncomment this line to create the database if it doesn't exist
 			/*await DbContextHelper
 				.EnsureDatabaseOkAsync(app)
 				.ConfigureAwait(false);*/
