@@ -21,8 +21,6 @@ public partial class Reminders
 
 	private Reminder? _selectedItem;
 
-	private DateTime _currentTime = DateTime.Now;
-
 	[Inject]
 	public ApiClient? ApiClient { get; set; }
 
@@ -60,10 +58,4 @@ public partial class Reminders
 
 	private Task RefreshAsync() =>
 		_table!.RefreshAsync();
-
-	//TODO: May need to re-enable this
-	/*private static string GetRowClass(ToDo toDo)
-	{
-		return toDo.IsCompleted ? "" : "todo-disabled";
-	}*/
 }

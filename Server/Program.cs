@@ -1,3 +1,5 @@
+using CSharpToDo.Server.Helpers;
+
 namespace CSharpToDo
 {
 	public class Program
@@ -43,9 +45,9 @@ namespace CSharpToDo
 			app.MapFallbackToFile("index.html");
 
 			//Uncomment this line to create the database if it doesn't exist
-			/*await DbContextHelper
+			await DbContextHelper
 				.EnsureDatabaseOkAsync(app)
-				.ConfigureAwait(false);*/
+				.ConfigureAwait(false);
 
 			await app.RunAsync();
 		}
