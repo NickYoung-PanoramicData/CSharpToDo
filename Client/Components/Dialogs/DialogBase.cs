@@ -1,9 +1,10 @@
 ﻿using CSharpToDo.Api;
-using CSharpToDo.Client.Components.Dialogs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using PanoramicData.Blazor;
 using PanoramicData.Blazor.Models;
+
+namespace CSharpToDo.Client.Components.Dialogs;
 
 public abstract class DialogBase : ComponentBase, IDisposable
 {
@@ -33,8 +34,11 @@ public abstract class DialogBase : ComponentBase, IDisposable
 	=> _bsModal?.InvokeVoidAsync("hide").AsTask() ?? Task.CompletedTask;
 
 	public void Dispose()
-	{        // Dispose of unmanaged resources.        Dispose(true);
-			 // Suppress finalization.        GC.SuppressFinalize(this);
+	{
+		// Dispose of unmanaged resources.
+		Dispose(true);
+		//Suppress finalization.
+		GC.SuppressFinalize(this);
 	}
 	protected virtual void Dispose(bool disposing)
 	{
@@ -43,10 +47,12 @@ public abstract class DialogBase : ComponentBase, IDisposable
 			return;
 		}
 		if (disposing)
-		{            // TODO: dispose managed state (managed objects).            _ = (_bsModal?.InvokeVoidAsync("dispose").AsTask());
+		{            // dispose managed state (managed objects).
+			_ = (_bsModal?.InvokeVoidAsync("dispose").AsTask());
 			_bsModal?.Dispose(); _ = (_module?.DisposeAsync().AsTask());
 		}
-		// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.        // TODO: set large fields to null. 
+		// free unmanaged resources (unmanaged objects) and override a finalizer below.
+		// set large fields to null.
 		_disposed = true;
 	}
 	protected virtual ConfirmDialog.Options GetDeleteConfirmOptions()

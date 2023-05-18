@@ -1,0 +1,94 @@
+﻿@page "/reminders"
+
+<PageTitle>Reminders</PageTitle>
+
+<h3>Reminders</h3>
+
+<AdminToolbar Create="OnCreate"
+			  DataProvider="_dataProvider"
+			  Edit="OnEdit"
+			  EntityTypeName="Reminder"
+			  Refresh="RefreshAsync"
+			  SelectedItem="_selectedItem"
+			  ShowDelete="true"
+			  ShowSearchField="false"
+			  TItem="Reminder" />
+
+<PDTable @ref="_table"
+		 AutoLoad="false"
+		 DataProvider="_dataProvider"
+		 DoubleClick="OnEdit"
+		 KeyField="t => t.Id"
+		 PageCriteria="_pageCriteria"
+		 SelectionMode="TableSelectionMode.Single"
+		 SelectionChanged="OnSelectionChanged"
+		 ShowPager="false"
+		 TItem="Reminder">
+
+	<PDColumn Field="t=> t.Name"
+			  ShowInDelete="(_)=> true"
+			  Sortable="true"
+			  TItem="Reminder">
+
+			  <EditTemplate>
+				  <input type="text" name="NameInput" @bind-value="context.Name"/>
+			  </EditTemplate>
+	</PDColumn>
+
+	<PDColumn Field="t=> t.DueUtc"
+			  ShowInCreate="(_)=> true"
+			  ShowInDelete="(_)=> true"
+			  ShowInEdit="(_)=> true"
+			  Sortable="true"
+			  TItem="Reminder"
+			  Title="Due Date">
+
+		<Template>
+			@if (context.DueUtc.Date == DateTime.Today)
+			{
+				<p>Today at @context.DueUtc.ToString("HH:mm")</p>
+			}
+			else if (context.DueUtc.Year == DateTime.Now.Year)
+			{
+				<p>@context.DueUtc.ToString("dd\\t\\h MMM HH:mm")</p>
+			}
+			else
+			{
+				<p>@context.DueUtc.ToString("dd\\t\\h MMM yyyy HH:mm")</p>
+			}
+		</Template>
+		<EditTemplate>
+
+			<input type="datetime-local" name="DueDateInput" min="@DateTime.Now.ToString("s")" @bind-value="context.DueUtc"/>
+		</EditTemplate>
+	</PDColumn>
+
+	<PDColumn Field="t=> t.CreatedUtc"
+			  ShowInCreate="(_)=> false"
+			  ShowInDelete="(_)=> false"
+			  ShowInEdit="(_)=> false"
+			  Sortable="true"
+			  TItem="Reminder"
+			  Title="Time Created">
+		<Template>
+			@if (context.CreatedUtc.Year == DateTime.Now.Year)
+			{
+				<p>@context.CreatedUtc.ToString("dd\\t\\h MMM HH:mm")</p>
+			}
+			else
+			{
+				<p>@context.CreatedUtc.ToString("dd\\t\\h MMM yyyy HH:mm")</p>
+			}
+		</Template>
+	</PDColumn>
+</PDTable>
+
+<EditDialog @ref="_editDialog"
+			TItem="Reminder"
+			DataProvider="_dataProvider"
+			Refresh="@(()=> RefreshAsync())"
+			Size="ModalSizes.Medium"
+			Table="_table"
+			TitleWidth="200">
+</EditDialog>
+

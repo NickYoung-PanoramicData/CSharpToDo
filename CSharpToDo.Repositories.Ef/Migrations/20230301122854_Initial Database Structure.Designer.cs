@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharpToDo.Repositories.Ef.Migrations
 {
-    [DbContext(typeof(ToDoDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20230301122854_Initial Database Structure")]
     partial class InitialDatabaseStructure
     {

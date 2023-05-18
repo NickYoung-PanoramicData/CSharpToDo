@@ -34,9 +34,11 @@ public class ApiClient : IDisposable
 		};
 
 		ToDos = RefitFor(ToDos!);
+		Reminders = RefitFor(Reminders!);
 	}
 
 	public IToDos ToDos { get; set; }
+	public IReminders Reminders { get; set; }
 
 	private T RefitFor<T>(T _)
 		=> RestService.For<T>(_httpClient, _refitSettings);

@@ -2,12 +2,6 @@
 using CSharpToDo.Repositories.Ef;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -15,9 +9,10 @@ namespace Microsoft.Extensions.DependencyInjection
 	{
 		public static IServiceCollection AddEfRepository(this IServiceCollection services, IConfiguration configuration)
 		{
-			services.AddDbContext<ToDoDbContext>(options =>
+			services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(configuration.GetConnectionString("ToDos")));
 			services.AddScoped<IToDosRepository, ToDosRepository>();
+			services.AddScoped<IRemindersRepository, RemindersRepository>();
 			return services;
 		}
 	}

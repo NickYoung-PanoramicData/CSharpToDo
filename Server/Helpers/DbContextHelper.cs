@@ -13,8 +13,8 @@ namespace CSharpToDo.Server.Helpers
 		{
 			using var scope = app.ApplicationServices.CreateScope();
 			var services = scope.ServiceProvider;
-			var logger = services.GetRequiredService<ILogger<ToDoDbContext>>();
-			using var dbContext = services.GetRequiredService<ToDoDbContext>();
+			var logger = services.GetRequiredService<ILogger<AppDbContext>>();
+			using var dbContext = services.GetRequiredService<AppDbContext>();
 			logger.LogInformation("Checking Database...");
 			var databaseExists = dbContext.GetService<IRelationalDatabaseCreator>().Exists();
 			if (databaseExists)

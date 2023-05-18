@@ -14,7 +14,6 @@ namespace CSharpToDo
 			builder.Services.AddRazorPages();
 			builder.Services.AddSwaggerGen();
 
-			//builder.Services.AddInMemoryRepository();
 			builder.Services.AddEfRepository(builder.Configuration);
 
 			var app = builder.Build();
@@ -45,11 +44,12 @@ namespace CSharpToDo
 			app.MapControllers();
 			app.MapFallbackToFile("index.html");
 
+			//Uncomment this line to create the database if it doesn't exist
 			await DbContextHelper
 				.EnsureDatabaseOkAsync(app)
 				.ConfigureAwait(false);
 
-			app.Run();
+			await app.RunAsync();
 		}
 	}
 }
