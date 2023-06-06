@@ -1,4 +1,5 @@
 ﻿@page "/reminders"
+@using CSharpToDo.Shared.Utilities
 
 <PageTitle>Reminders</PageTitle>
 
@@ -44,18 +45,7 @@
 			  Title="Due Date">
 
 		<Template>
-			@if (context.DueUtc.Date == DateTime.Today)
-			{
-				<p>Today at @context.DueUtc.ToString("HH:mm")</p>
-			}
-			else if (context.DueUtc.Year == DateTime.Now.Year)
-			{
-				<p>@context.DueUtc.ToString("dd\\t\\h MMM HH:mm")</p>
-			}
-			else
-			{
-				<p>@context.DueUtc.ToString("dd\\t\\h MMM yyyy HH:mm")</p>
-			}
+			<p>@DateDisplayLogic.GetFormattedDate(context.DueUtc, true)</p>
 		</Template>
 		<EditTemplate>
 
@@ -71,14 +61,7 @@
 			  TItem="Reminder"
 			  Title="Time Created">
 		<Template>
-			@if (context.CreatedUtc.Year == DateTime.Now.Year)
-			{
-				<p>@context.CreatedUtc.ToString("dd\\t\\h MMM HH:mm")</p>
-			}
-			else
-			{
-				<p>@context.CreatedUtc.ToString("dd\\t\\h MMM yyyy HH:mm")</p>
-			}
+			<p>@DateDisplayLogic.GetFormattedDate(context.DueUtc, false)</p>
 		</Template>
 	</PDColumn>
 </PDTable>
