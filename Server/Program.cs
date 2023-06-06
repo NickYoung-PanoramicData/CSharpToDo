@@ -1,4 +1,4 @@
-using CSharpToDo.Server.Helpers;
+using CSharpToDo.Data.Interfaces;
 
 namespace CSharpToDo
 {
@@ -14,6 +14,7 @@ namespace CSharpToDo
 			builder.Services.AddRazorPages();
 			builder.Services.AddSwaggerGen();
 
+			//builder.Services.AddInMemoryRepository();
 			builder.Services.AddEfRepository(builder.Configuration);
 
 			var app = builder.Build();
@@ -44,8 +45,10 @@ namespace CSharpToDo
 			app.MapControllers();
 			app.MapFallbackToFile("index.html");
 
-			//Uncomment this line to create the database if it doesn't exist
-			await DbContextHelper
+
+			var databaseInitializer = app.Services.GetRequiredService<IDatabaseInitializer>();
+
+			await databaseInitializer
 				.EnsureDatabaseOkAsync(app)
 				.ConfigureAwait(false);
 

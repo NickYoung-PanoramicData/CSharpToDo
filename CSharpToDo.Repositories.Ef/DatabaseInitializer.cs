@@ -1,15 +1,18 @@
-﻿using CSharpToDo.Repositories.Ef;
+﻿using CSharpToDo.Data.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace CSharpToDo.Server.Helpers;
+namespace CSharpToDo.Repositories.Ef;
 
-internal static class DbContextHelper
+internal class DatabaseInitializer : IDatabaseInitializer
 {
-	internal static async Task EnsureDatabaseOkAsync(IApplicationBuilder app)
+	public async Task EnsureDatabaseOkAsync(IApplicationBuilder app)
 	{
 		using var scope = app.ApplicationServices.CreateScope();
 		var services = scope.ServiceProvider;
@@ -43,4 +46,3 @@ internal static class DbContextHelper
 		}
 	}
 }
-

@@ -13,6 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
 				options.UseSqlServer(configuration.GetConnectionString("ToDos")));
 			services.AddScoped<IToDosRepository, ToDosRepository>();
 			services.AddScoped<IRemindersRepository, RemindersRepository>();
+			services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
+
 			return services;
 		}
 	}

@@ -1,4 +1,5 @@
-﻿using CSharpToDo.Data.Interfaces;
+﻿using CSharpToDo.Data.Implementations;
+using CSharpToDo.Data.Interfaces;
 using CSharpToDo.Repositories.InMemory;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -9,6 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
 		{
 			services.AddSingleton<IToDosRepository, ToDosRepository>();
 			services.AddSingleton<IRemindersRepository, RemindersRepository>();
+			services.AddTransient<IDatabaseInitializer, NullDatabaseInitializer>();
 			return services;
 		}
 	}
