@@ -11,7 +11,6 @@ public class OptionalParametersTest
 	{
 		Console.WriteLine(par1);
 		Console.WriteLine(par2);
-		Console.WriteLine(par3);
 		return par1 + par2 + par3;
 	}
 }
