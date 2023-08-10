@@ -2,6 +2,11 @@
 
 public class OptionalParametersTest
 {
+	public string OptionalParameters(int par1)
+	{
+		Console.WriteLine(par1);
+		return par1.ToString();
+	}
 	public string OptionalParameters(string par1, string par2, string par3 = "test")
 	{
 		Console.WriteLine(par1);
