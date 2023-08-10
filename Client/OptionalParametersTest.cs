@@ -9,7 +9,7 @@ public class OptionalParametersTest
 		return par1.ToString();
 	}
 
-	public string OptionalParameters(string par1, string par2, string par3 = "test")
+	public string OptionalParameters(string par1, string par2, string par3 = "testString")
 	{
 		Console.WriteLine(par1);
 		Console.WriteLine(par2);
