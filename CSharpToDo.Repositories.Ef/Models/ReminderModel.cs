@@ -5,14 +5,12 @@ namespace CSharpToDo.Repositories.Ef.Models;
 public class ReminderModel : IAuditable
 {
 	public int Id { get; set; }
-
 	public string Name { get; set; } = string.Empty;
-
 	public DateTime DueUtc { get; set; }
-
 	public DateTime CreatedUtc { get; set; } = DateTime.Now;
-
 	public DateTime? LastModifiedUtc { get; set; }
+
+	public string Description { get; set; } = string.Empty;
 
 	internal Reminder AsReminder() => new()
 	{
@@ -20,7 +18,8 @@ public class ReminderModel : IAuditable
 		Name = Name,
 		DueUtc = DueUtc,
 		CreatedUtc = CreatedUtc,
-		LastModifiedUtc = LastModifiedUtc
+		LastModifiedUtc = LastModifiedUtc,
+		Description = Description
 	};
 
 	internal static ReminderModel AsReminderModel(Reminder reminder) => new()
@@ -29,6 +28,7 @@ public class ReminderModel : IAuditable
 		Name = reminder.Name,
 		DueUtc = reminder.DueUtc,
 		CreatedUtc = reminder.CreatedUtc,
-		LastModifiedUtc = reminder.LastModifiedUtc
+		LastModifiedUtc = reminder.LastModifiedUtc,
+		Description = reminder.Description
 	};
 }

@@ -47,6 +47,7 @@ namespace CSharpToDo.Repositories.Ef
 			}
 
 			existingItem.Name = item.Name;
+			existingItem.Description = item.Description;
 			existingItem.DueUtc = item.DueUtc;
 
 			await _dbContext

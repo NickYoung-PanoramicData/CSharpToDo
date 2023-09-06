@@ -36,6 +36,16 @@
 			  </EditTemplate>
 	</PDColumn>
 
+	<PDColumn Field="t=> t.Description"
+			  ShowInDelete="(_)=> true"
+			  Sortable="true"
+			  TItem="Reminder">
+
+		<EditTemplate>
+			<input type="text" name="DescriptionInput" @bind-value="context.Description" />
+		</EditTemplate>
+	</PDColumn>
+
 	<PDColumn Field="t=> t.DueUtc"
 			  ShowInCreate="(_)=> true"
 			  ShowInDelete="(_)=> true"

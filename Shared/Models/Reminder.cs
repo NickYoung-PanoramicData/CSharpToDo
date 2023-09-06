@@ -15,5 +15,7 @@ namespace CSharpToDo.Shared.Models
 		public DateTime? LastModifiedUtc { get; set; }
 
 		public string DueUtcString => DueUtc.ToString("f");
+
+		public string Description { get; set; } = string.Empty;
 	}
 }
